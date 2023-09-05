@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- <style>
+      .form {
+        display: flex;
+        flex-direction: column;
+      }
+      .input-wrapper {
+        display: flex;
+        flex-direction: row;
+      }
+      .input {
+        width: 5%;
+      }
+      .radio-input-wrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      .radio {
+        display: flex;
+        flex-direction: column;
+      }
+      .radio-input {
+        display: flex;
+        flex-direction: row;
+      }
+    </style> -->
+  </head>
+  <body>
+    <h1>User Input</h1>
+    <form action="">
+      <table>
+        <tr>
+          <td>Nama</td>
+          <td colspan="2">
+            <input type="text" id="name" name="name" style="width: 90%" />
+          </td>
+          <td id="name-validation"></td>
+        </tr>
+        <tr>
+          <td>Gender</td>
+          <td colspan="2" id="gender">
+            <input type="radio" id="male" name="male" value="male" />
+            <label for="male">Male</label><br />
+            <input type="radio" id="female" name="female" value="female" />
+            <label for="female">Female</label>
+          </td>
+          <td id="gender-validation"></td>
+        </tr>
+        <tr>
+          <td>Height</td>
+          <td colspan="2">
+            <input id="height" name="height" type="text" style="width: 50%" />
+          </td>
+          <td id="height-validation"></td>
+        </tr>
+        <tr>
+          <td>Address</td>
+          <td colspan="2">
+            <textarea
+              id="address"
+              name="address"
+              rows="4"
+              style="width: 90%"
+            ></textarea>
+          </td>
+          <td id="address-validation"></td>
+        </tr>
+        <tr>
+          <td>Province</td>
+          <td colspan="2">
+            <select id="province" name="province">
+              <option value="" disabled selected>--Select a province--</option>
+              <option value="west-java">West Java</option>
+              <option value="central-java">Central Java</option>
+              <option value="east-java">East Java</option>
+            </select>
+          </td>
+          <td id="province-validation"></td>
+        </tr>
+        <tr>
+          <td>City</td>
+          <td colspan="2">
+            <select id="city" name>
+              <option value="" disabled selected>--Select a City--</option>
+            </select>
+          </td>
+          <td id="city-validation"></td>
+        </tr>
+        <tr>
+          <td>Hobby</td>
+          <td colspan="2" id="hobby">
+            <input
+              type="checkbox"
+              id="hobby1"
+              name="hobby1"
+              value="Travelling"
+            />
+            <label for="hobby1">Travelling</label><br />
+            <input type="checkbox" id="hobby2" name="hobby2" value="Reading" />
+            <label for="hobby2">Reading</label><br />
+            <input type="checkbox" id="hobby3" name="hobby3" value="Swimming" />
+            <label for="hobby3">Swimming</label><br />
+            <input type="checkbox" id="hobby4" name="hobby4" value="Painting" />
+            <label for="hobby4">Painting</label><br />
+          </td>
+          <td id="hobby-validation"></td>
+        </tr>
+        <tr>
+          <td>Captcha</td>
+          <td><input type="text" disabled id="captcha" /></td>
+          <td><input type id="captcha-confirmation" /></td>
+          <td id="captcha-validation"></td>
+        </tr>
+      </table>
+      <button type="button" id="submit">Submit</button>
+      <button id="reset">Reset</button>
+    </form>
+    <script>
+      const name = document.getElementById("name");
+      const gender = document.getElementById("gender");
+      const height = document.getElementById("height");
+      const address = document.getElementById("address");
+      const province = document.getElementById("province");
+      const city = document.getElementById("city");
+      const hobby = document.getElementById("hobby");
+      const captcha = document.getElementById("captcha");
+      const captchaConfirmation = document.getElementById(
+        "captcha-confirmation"
+      );
+      const nameValidation = document.getElementById("name-validation");
+      const genderValidation = document.getElementById("gender-validation");
+      const heightValidation = document.getElementById("height-validation");
+      const addressValidation = document.getElementById("address-validation");
+      const provinceValidation = document.getElementById("province-validation");
+      const cityValidation = document.getElementById("city-validation");
+      const hobbyValidation = document.getElementById("hobby-validation");
+      const captchaValidation = document.getElementById("captcha-validation");
+
+      const submitButton = document.getElementById("submit");
+      function validateName(name) {
+        if (name === "") {
+          nameValidation.innerHTML = " Nama harus diisi";
+        } else if (name.length < 5) {
+          nameValidation.innerHTML = " Nama harus lebih dari 5 karakter";
+        } else {
+          nameValidation.innerHTML = "";
+        }
+      }
+      function validateGender(gender) {
+        genderInput = gender.getElementsByTagName("input");
+        let checked = false;
+        for (let i = 0; i < genderInput.length; i++) {
+          if (genderInput[i].checked) {
+            checked = true;
+            continue;
+          }
+        }
+        if (!checked) {
+          genderValidation.innerHTML = "gender harus diisi";
+        } else {
+          genderValidation.innerHTML = "";
+        }
+      }
+
+      function validateHeight(height) {
+        //validate number
+        if (height === "") {
+          heightValidation.innerHTML = " Tinggi harus diisi";
+        } else if (isNaN(height)) {
+          heightValidation.innerHTML = " Tinggi harus berupa angka";
+        } else {
+          heightValidation.innerHTML = "";
+        }
+      }
+      function validateAddress(address) {
+        if (address === "") {
+          addressValidation.innerHTML = " Alamat harus diisi";
+        } else if (address.length < 5) {
+          addressValidation.innerHTML = " Alamat harus lebih dari 5 karakter";
+        } else if (address.length > 100) {
+          addressValidation.innerHTML =
+            " Alamat harus kurang dari 100 karakter";
+        } else {
+          addressValidation.innerHTML = "";
+        }
+      }
+
+      function validateProvince(province) {
+        if (province === "") {
+          provinceValidation.innerHTML = "Provinsi Waajib diisi";
+        } else {
+          provinceValidation.innerHTML = "";
+        }
+      }
+      function validateCity(city) {
+        if (city === "") {
+          cityValidation.innerHTML = "Kota Wajib diisi";
+        } else {
+          cityValidation.innerHTML = "";
+        }
+      }
+
+      function validateHobby(hobby) {
+        const hobbyInput = hobby.getElementsByTagName("input");
+        let count = 0;
+        for (let i = 0; i < hobbyInput.length; i++) {
+          if (hobbyInput[i].checked) {
+            count++;
+          }
+        }
+        if (count < 1) {
+          hobbyValidation.innerHTML = " Pilih minimal 1 hobi";
+        } else {
+          hobbyValidation.innerHTML = "";
+        }
+      }
+
+      function validateCaptcha(captcha, captchaConfirmation) {
+        if (captchaConfirmation === "") {
+          captchaValidation.innerHTML = " Captcha harus diisi";
+        } else if (captcha !== captchaConfirmation) {
+          captchaValidation.innerHTML = " Captcha tidak sesuai";
+        } else {
+          captchaValidation.innerHTML = "";
+        }
+      }
+
+      const cities = [
+        // Bandung Kuningan Indramaju west-java
+        {
+          city: "Bandung",
+          province: "west-java",
+        },
+        {
+          city: "Kuningan",
+          province: "west-java",
+        },
+        {
+          city: "Indramayu",
+          province: "west-java",
+        },
+        // Semarang Ungaran Solo central-java
+        {
+          city: "Semarang",
+          province: "central-java",
+        },
+        {
+          city: "Ungaran",
+          province: "central-java",
+        },
+        {
+          city: "Solo",
+          province: "central-java",
+        },
+        // Surabaya Sidoarjo Malang east-java
+        {
+          city: "Surabaya",
+          province: "east-java",
+        },
+        {
+          city: "Sidoarjo",
+          province: "east-java",
+        },
+        {
+          city: "Malang",
+          province: "east-java",
+        },
+      ];
+      function generateCity(province) {
+        const option = document.createElement("option");
+        option.value = "";
+        option.text = "Select your option";
+        option.disabled = true;
+        option.selected = true;
+        document.getElementById("city").appendChild(option);
+        cities.forEach((city) => {
+          if (city.province === province) {
+            const option = document.createElement("option");
+            option.value = city.city;
+            option.text = city.city;
+            document.getElementById("city").appendChild(option);
+          }
+        });
+      }
+
+      province.addEventListener("change", function (event) {
+        document.getElementById("city").innerHTML = "";
+        generateCity(event.target.value);
+      });
+
+      function generateCaptcha() {
+        // captcha 0-9 5 digit
+        let captcha = "";
+        for (let i = 0; i < 5; i++) {
+          captcha += Math.floor(Math.random() * 10);
+        }
+        document.getElementById("captcha").value = captcha;
+      }
+
+      generateCaptcha();
+      submitButton.addEventListener("click", function (event) {
+        validateName(name.value);
+        validateGender(gender);
+        validateHeight(height.value);
+        validateAddress(address.value);
+        validateProvince(province.value);
+        validateCity(city.value);
+        validateHobby(hobby);
+        validateCaptcha(captcha.value, captchaConfirmation.value);
+
+        // jika semua validasi terpenuhi
+        if (
+          nameValidation.innerHTML === "" &&
+          genderValidation.innerHTML === "" &&
+          heightValidation.innerHTML === "" &&
+          addressValidation.innerHTML === "" &&
+          hobbyValidation.innerHTML === "" &&
+          provinceValidation.innerHTML === "" &&
+          cityValidation.innerHTML === "" &&
+          captchaValidation.innerHTML === ""
+        ) {
+          if (confirm("Apakah anda yakin?")) {
+            alert("Data berhasil dikirim");
+            window.location.reload();
+          } else {
+            event.preventDefault();
+          }
+        } else {
+          event.preventDefault();
+        }
+        event.preventDefault();
+      });
+
+      const resetButton = document.getElementById("reset");
+
+      resetButton.addEventListener("click", function (event) {
+        window.location.reload();
+      });
+    </script>
+  </body>
+</html>

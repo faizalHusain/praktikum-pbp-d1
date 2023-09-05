@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="day"></div>
+    <h1 id="name"></h1>
+    <script>
+      const fruit = ["Apple", "Banana", "Cherry", "Orange"];
+      // for loop
+      for (let i = 0; i < fruit.length; i++) {
+        document.write(fruit[i] + "<br>");
+      }
+      // while loop
+      let i = 0;
+      while (i < fruit.length) {
+        document.write(fruit[i] + "<br>");
+        i++;
+      }
+      // do while loop
+      let j = 0;
+      do {
+        document.write(fruit[j] + "<br>");
+        j++;
+      } while (j < fruit.length);
+      // let data = window.localStorage.getItem("name");
+      if (data) {
+        document.getElementById("name").innerHTML = data;
+      }
+    </script>
+  </body>
+</html>

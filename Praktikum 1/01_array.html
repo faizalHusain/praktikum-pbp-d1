@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="day"></div>
+    <script>
+      const fruits = ["Apple", "Banana", "Cherry", "Orange"];
+
+      fruits[1] = "lemmon";
+      fruits[fruits.length - 1];
+
+      fruits.push("grape");
+
+      const foods = new Array("Nasi", "Sayur", "Buah");
+
+      for (let i = 0; i < fruits.length; i++) {
+        document.write(fruits[i] + "<br>");
+      }
+      fruits.forEach((fruit) => {
+        document.write(fruit + "<br>");
+      });
+    </script>
+  </body>
+</html>
